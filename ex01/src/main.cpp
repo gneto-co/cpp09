@@ -1,4 +1,4 @@
-#include "../includes/Span.hpp"
+#include "../includes/RPN.hpp"
 
 // SECTION - press_any_key()
 
@@ -26,94 +26,22 @@ void press_any_key()
 
 // SECTION - main()
 
-#include <vector>
-int main(int, char **)
+#include <list>
+int main(int ac, char **av)
 {
-	Span list(5);
+	if (ac != 2)
+		return 1;
+
+	RPN rpn(av[1]);
+	int result;
+
+	try
 	{
-		MAIN_MSG("add a number")
-		try
-		{
-			list.addNumber(-10);
-			list.addNumber(-10);
-			list.addNumber(-20);
-			list.addNumber(-30);
-			list.addNumber(-50);
-		}
-		CATCH
-		press_any_key();
+		result = rpn.get_result();
+		PRINT << GREEN << result << RESEND;
 	}
-	SPACER(2)
+	CATCH
 
-	{
-		MAIN_MSG("add a number when list is already full")
-		try
-		{
-			list.addNumber(40);
-		}
-		CATCH
-		press_any_key();
-	}
-	SPACER(2)
-
-	{
-		MAIN_MSG("valid shortest and longest span")
-		try
-		{
-			PRINT << "Shortest Span: " << list.shortestSpan() << RESEND;
-		}
-		CATCH
-		try
-		{
-			PRINT << "Longest Span: " << list.longestSpan() << RESEND;
-		}
-		CATCH
-		press_any_key();
-	}
-	SPACER(2)
-
-	Span list2(100);
-	{
-		MAIN_MSG("invalid shortest and longest span")
-		try
-		{
-			PRINT << "Shortest Span: " << list2.shortestSpan() << RESEND;
-		}
-		CATCH
-		try
-		{
-			PRINT << "Longest Span: " << list2.longestSpan() << RESEND;
-		}
-		CATCH
-		press_any_key();
-	}
-	SPACER(2)
-
-	{
-		MAIN_MSG("many numbers in one call")
-
-		std::vector<int> vector1;
-		for (int i = 0; i < 100; i++)
-			vector1.push_back(i);
-		
-		try
-		{
-			list2.addNumber(vector1.begin(), vector1.end());
-		}
-		CATCH
-
-		try
-		{
-			PRINT << "Shortest Span: " << list2.shortestSpan() << RESEND;
-		}
-		CATCH
-		try
-		{
-			PRINT << "Longest Span: " << list2.longestSpan() << RESEND;
-		}
-		CATCH
-		press_any_key();
-	}
 	SPACER(2)
 
 	return (0);

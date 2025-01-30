@@ -39,7 +39,7 @@ int main(int ac, char **av)
 		}
 		CATCH
 	}
-	press_any_key();
+	// press_any_key();
 	SPACER(2)
 
 	return (0);
