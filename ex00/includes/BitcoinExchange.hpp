@@ -5,15 +5,14 @@
 
 #include <algorithm>
 #include <exception>
-#include <vector>
+#include <map>
 #include <fstream>
 
 class BitcoinExchange
 {
 private:
 	/* attributes */
-	std::vector<double> _exchange_rate;
-	std::vector<STRING> _date;
+	std::map<STRING, double> _data;
 	const STRING _input_file;
 	const STRING _data_file;
 	STRING _line;

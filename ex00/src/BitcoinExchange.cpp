@@ -35,8 +35,8 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &src)
 {
     if (this != &src)
     {
-        this->_exchange_rate = src._exchange_rate;
-        this->_date = src._date;
+        this->_data = src._data;
+
     }
 
     return *this;
@@ -66,8 +66,7 @@ void BitcoinExchange::get_csv_data()
             date = line.substr(0, 10);
             rate = line.substr(11);
 
-            _date.push_back(date);
-            _exchange_rate.push_back(atof(rate.c_str()));
+            _data[date] = atof(rate.c_str());
         }
     }
 
@@ -185,19 +184,31 @@ void BitcoinExchange::print_btc_info()
         {
             if (valid_date(date) && valid_value(value))
             {
-                if (date < _date.front())
+
+                std::map<STRING, double>::iterator first = _data.begin();
+                std::map<STRING, double>::iterator last = --_data.end();
+
+                if (date < first->first)
                     rate = 0;
-                if (date > _date.back())
-                    rate = _exchange_rate.back();
-                for (int i = 0; true; i++)
+                else if (date > last->first)
+                    rate = last->second;
+                else
                 {
-                    if (_date[i] <= date && _date[i+1] > date)
+                    std::map<STRING, double>::iterator it;
+                    for (it = _data.begin(); it != _data.end(); ++it)
                     {
-                        rate = _exchange_rate[i];
-                        break;
+                        std::map<STRING, double>::iterator next_it;
+                        next_it = it;
+                        ++next_it;
+                        if (it->first <= date && next_it->first > date)
+                        {
+                            rate = it->second;
+                            break;
+                        }
                     }
                 }
-                PRINT << BLUE << date << " : " << value << " = " << value*rate << RESEND;
+
+                PRINT << BLUE << date << " : " << value << " = " << value * rate << RESEND;
             }
         }
     }
