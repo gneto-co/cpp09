@@ -39,6 +39,12 @@ public:
 	public:
 		virtual const char *what() const throw();
 	};
+
+	class DivisionByZero : public std::exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
 };
 
 #endif

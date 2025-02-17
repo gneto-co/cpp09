@@ -49,8 +49,8 @@ int main(int ac, char **av)
 		double time_deque = pm_deque.get_time();
 		//
 		pm_vector.print_container();
-		PRINT << BRIGHT_BLUE << "(vector) Size: " << pm_vector.get_size() << ", Time: " << time_vector << " seconds" << RESEND;
-		PRINT << BRIGHT_BLUE << "(deque) Size: " << pm_deque.get_size() << ", Time: " << time_deque << " seconds" << RESEND;
+		PRINT << BRIGHT_BLUE << "(vector) Size: " << pm_vector.get_size() << ", Time: " << std::fixed << time_vector << " seconds" << RESEND;
+		PRINT << BRIGHT_BLUE << "(deque) Size: " << pm_deque.get_size() << ", Time: " << std::fixed << time_deque << " seconds" << RESEND;
 	}
 	CATCH
 	

@@ -121,6 +121,8 @@ int RPN::get_result()
                 break;
 
             case '/':
+                if (nb2 == 0)
+                    throw DivisionByZero();
                 stack.push_back(nb1 / nb2);
                 break;
             }
@@ -142,6 +144,11 @@ int RPN::get_result()
 const char *RPN::InvalidInput::what() const throw()
 {
     return (RED "Invalid input" RESET);
+}
+
+const char *RPN::DivisionByZero::what() const throw()
+{
+    return (RED "Division by zero" RESET);
 }
 
 /* !SECTION */

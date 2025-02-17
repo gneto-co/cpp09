@@ -179,7 +179,7 @@ void BitcoinExchange::print_btc_info()
         }
         STRING date;
         double value;
-        double rate;
+        double rate = 0.0;
         if (valid_line(_line))
         {
             if (valid_date(date) && valid_value(value))
