@@ -9,6 +9,8 @@
 #include <fstream>
 #include <sstream>
 
+#define SHOW_MATHS true
+
 class RPN
 {
 private:
@@ -18,7 +20,7 @@ private:
 	/* methods */
 	bool valid_number(char &);
 	bool valid_signal(char &);
-	int get_stack_nb(std::list<char> &);
+	int get_stack_nb(std::list<int> &);
 
 public:
 	/* constructors destructors */

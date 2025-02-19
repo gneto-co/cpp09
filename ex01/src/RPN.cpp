@@ -71,7 +71,8 @@ bool RPN::valid_signal(char &signal)
     return false;
 }
 
-int RPN::get_stack_nb(std::list<char> &stack)
+// return and removes last element
+int RPN::get_stack_nb(std::list<int> &stack)
 {
     if (stack.empty())
         throw InvalidInput();
@@ -88,7 +89,7 @@ int RPN::get_result()
     std::stringstream ss(_input);
     std::string token;
 
-    std::list<char> stack;
+    std::list<int> stack;
     while (ss >> token) 
     {
         int nb1;
@@ -126,6 +127,9 @@ int RPN::get_result()
                 stack.push_back(nb1 / nb2);
                 break;
             }
+            if (SHOW_MATHS == true)
+
+                PRINT << BRIGHT_CYAN << nb1 << " " << value << " " << nb2 << " = " << stack.back() << RESEND;
         }
         else
         {

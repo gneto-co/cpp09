@@ -34,12 +34,16 @@ int main(int ac, char **av)
 	MAIN_MSG("vector and deque")
 	try
 	{
+		PmergeMe<std::vector<int> > print_vector;
 		PmergeMe<std::vector<int> > pm_vector;
 		PmergeMe<std::deque<int> > pm_deque;
+
+		//
+		print_vector.set_numbers(ac, av);
+		print_vector.print_container();
 		//
 		pm_vector.set_time();
-		pm_vector.set_numbers(ac, av);		
-		pm_vector.print_container();
+		pm_vector.set_numbers(ac, av);
 		pm_vector.sort();
 		double time_vector = pm_vector.get_time();
 		//
